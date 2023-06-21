@@ -6,5 +6,4 @@ What can you find inside my WorkTree?
 - A link that connects the website to my Behance portfolio;
 - And one last link that connects the website to my email as a contact measure.
 
-Note: Still under development
 
