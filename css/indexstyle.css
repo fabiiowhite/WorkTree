@@ -48,7 +48,7 @@ body{
     font-weight: 300;
 }
 
-.button {
+.button-github {
     position: absolute;
     bottom: 20px; /* Adjust the vertical position as needed */
     left: 50%; /* Center the button horizontally */
@@ -66,11 +66,11 @@ body{
     transition: background-color 0.8s ease;
   }
   
-  .button:hover {
+  .button-github:hover {
     background-color: orange;
   }
   
-  .button img {
+  .button-github img {
     display: block;
     width: 100%;
     height: auto;
