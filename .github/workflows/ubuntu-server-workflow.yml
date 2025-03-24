@@ -17,10 +17,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y sshpass
 
-      # Step 2: Add the Raspberry Pi's SSH key to known_hosts (avoid host verification prompt)
+      # Step 2: Ensure the .ssh directory exists and add Raspberry Pi to known_hosts
       - name: Add Raspberry Pi to known_hosts
         run: |
-          ssh-keyscan -H ${{ secrets.DEPLOY_SERVER }} >> ~/.ssh/known_hosts
+          mkdir -p ~/.ssh  # Create .ssh directory if it doesn't exist
+          ssh-keyscan -H ${{ secrets.DEPLOY_SERVER }} >> ~/.ssh/known_hosts  # Add the server to known_hosts
 
       # Step 3: Test the SSH connection by creating a file (touch hello.world)
       - name: Test with touch hello.world
