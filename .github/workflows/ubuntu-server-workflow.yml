@@ -1,0 +1,22 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy to Ubuntu Server
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["master"]
+
+jobs:
+  # Single deploy job since we're just deploying
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Set-up SSH Connection to Server
+        run: |
+            apt install sshpass
+            sshpass -p '${{ secrets.SSH_PASSWORD }}' ssh ${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_SERVER }}
+
+      - name: Test with touch hello.fab
+        run: |
+            touch hello.fab
