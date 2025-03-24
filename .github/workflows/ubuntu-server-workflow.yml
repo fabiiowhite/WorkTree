@@ -8,7 +8,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, ubuntu-latest]
 
     steps:
       # Step 1: Install sshpass
