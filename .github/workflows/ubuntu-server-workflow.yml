@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Set up SSH connection to the server
+      # Step 1: Install sshpass
       - name: Install sshpass
         run: |
           sudo apt-get update
@@ -21,7 +21,8 @@ jobs:
       - name: Add Raspberry Pi to known_hosts
         run: |
           mkdir -p ~/.ssh  # Create .ssh directory if it doesn't exist
-          ssh-keyscan -H ${{ secrets.DEPLOY_SERVER }} >> ~/.ssh/known_hosts  # Add the server to known_hosts
+          echo "Adding Raspberry Pi to known_hosts..."
+          ssh-keyscan -H "${{ secrets.DEPLOY_SERVER }}" >> ~/.ssh/known_hosts  # Add the server to known_hosts
 
       # Step 3: Test the SSH connection by creating a file (touch hello.world)
       - name: Test with touch hello.world
