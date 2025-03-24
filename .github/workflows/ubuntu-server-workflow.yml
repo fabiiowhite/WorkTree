@@ -1,22 +1,28 @@
-# Simple workflow for deploying static content to GitHub Pages
+# Simple workflow for deploying static content to a remote server (Ubuntu)
 name: Deploy to Ubuntu Server
 
 on:
-  # Runs on pushes targeting the default branch
   push:
-    branches: ["master"]
+    branches:
+      - master  # Trigger deploy on push to the master branch
 
 jobs:
-  # Single deploy job since we're just deploying
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-
-      - name: Set-up SSH Connection to Server
+      # Step 1: Set up SSH connection to the server
+      - name: Install sshpass
         run: |
-            sudo apt install sshpass
-  
+          sudo apt-get update
+          sudo apt-get install -y sshpass
 
-      - name: Test with touch hello.fab
+      # Step 2: Add the Raspberry Pi's SSH key to known_hosts (avoid host verification prompt)
+      - name: Add Raspberry Pi to known_hosts
         run: |
-            sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_SERVER }} "touch hello.world"
+          ssh-keyscan -H ${{ secrets.DEPLOY_SERVER }} >> ~/.ssh/known_hosts
+
+      # Step 3: Test the SSH connection by creating a file (touch hello.world)
+      - name: Test with touch hello.world
+        run: |
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_SERVER }} "touch hello.world"
