@@ -15,9 +15,8 @@ jobs:
       - name: Set-up SSH Connection to Server
         run: |
             sudo apt install sshpass
-            sshpass -p '${{ secrets.SSH_PASSWORD }}' ssh ${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_SERVER }}
+  
 
       - name: Test with touch hello.fab
         run: |
-            cd /home/fabio/
-            touch hello.fab
+            sshpass -p '${{ secrets.SSH_PASSWORD }}' -o ssh StrictHostKeyChecking=no ${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_SERVER }} "touch hello.world"
