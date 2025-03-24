@@ -19,4 +19,4 @@ jobs:
 
       - name: Test with touch hello.fab
         run: |
-            sshpass -p '${{ secrets.SSH_PASSWORD }}' -o ssh StrictHostKeyChecking=no ${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_SERVER }} "touch hello.world"
+            sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_SERVER }} "touch hello.world"
