@@ -19,4 +19,5 @@ jobs:
 
       - name: Test with touch hello.fab
         run: |
+            cd /home/fabio/
             touch hello.fab
